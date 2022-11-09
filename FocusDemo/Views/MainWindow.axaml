@@ -13,7 +13,8 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
     
-    <StackPanel Orientation="Vertical" local:FocusManager.FocusedElement="{Binding ElementName=TxtB}">
+    <StackPanel Orientation="Vertical" 
+                local:FocusManager.FocusedElement="{Binding ElementName=TxtB}">
         <TextBox x:Name="TxtA" Text="A" />
         <TextBox x:Name="TxtB" Text="B" />
     </StackPanel>
