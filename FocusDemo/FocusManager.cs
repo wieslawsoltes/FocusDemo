@@ -40,6 +40,7 @@ public static class FocusManager
         if (sender is IInputElement inputElement)
         {
             inputElement.Focus();
+            inputElement.AttachedToVisualTree -= NewValueOnAttachedToVisualTree;
         }
     }
 }
