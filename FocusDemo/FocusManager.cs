@@ -1,6 +1,5 @@
 ﻿using System;
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Input;
 
 namespace FocusDemo;
@@ -15,7 +14,7 @@ public static class FocusManager
         return obj.GetValue(FocusedElementProperty);
     }
 
-    public static void SetFocusedElement(AvaloniaObject obj, TextBox value)
+    public static void SetFocusedElement(AvaloniaObject obj, IInputElement value)
     {
         obj.SetValue(FocusedElementProperty, value);
     }
@@ -27,11 +26,17 @@ public static class FocusManager
 
     private static void FocusedElementChanged(AvaloniaPropertyChangedEventArgs<IInputElement> obj)
     {
-        var newValue = obj.NewValue.GetValueOrDefault();
-        if (newValue is { })
+        if (obj.NewValue.GetValueOrDefault() is { } newValue)
         {
-            newValue.AttachedToVisualTree += NewValueOnAttachedToVisualTree;
-            newValue.Focus();
+            if (newValue.IsAttachedToVisualTree)
+            {
+                newValue.Focus();
+            }
+            else
+            {
+                
+                newValue.AttachedToVisualTree += NewValueOnAttachedToVisualTree;
+            }
         }
     }
 
