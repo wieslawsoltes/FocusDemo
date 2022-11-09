@@ -8,14 +8,14 @@ namespace FocusDemo;
 public static class FocusManager
 {
     public static readonly AttachedProperty<IInputElement> FocusedElementProperty = 
-        AvaloniaProperty.RegisterAttached<IAvaloniaObject, IInputElement>("FocusedElement", typeof(FocusManager));
+        AvaloniaProperty.RegisterAttached<AvaloniaObject, IInputElement>("FocusedElement", typeof(FocusManager));
 
-    public static TextBox GetFocusedElement(IAvaloniaObject obj)
+    public static IInputElement GetFocusedElement(AvaloniaObject obj)
     {
-        return (TextBox)obj.GetValue(FocusedElementProperty);
+        return obj.GetValue(FocusedElementProperty);
     }
 
-    public static void SetFocusedElement(IAvaloniaObject obj, TextBox value)
+    public static void SetFocusedElement(AvaloniaObject obj, TextBox value)
     {
         obj.SetValue(FocusedElementProperty, value);
     }
