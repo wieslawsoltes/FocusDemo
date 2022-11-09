@@ -26,26 +26,26 @@ public static class FocusManager
 
     private static void FocusedElementChanged(AvaloniaPropertyChangedEventArgs<IInputElement> obj)
     {
-        if (obj.NewValue.GetValueOrDefault() is { } newValue)
+        var oldValue = obj.OldValue.GetValueOrDefault();
+        var newValue = obj.NewValue.GetValueOrDefault();
+
+        if (oldValue is { })
         {
-            if (newValue.IsAttachedToVisualTree)
-            {
-                newValue.Focus();
-            }
-            else
-            {
-                
-                newValue.AttachedToVisualTree += NewValueOnAttachedToVisualTree;
-            }
+            oldValue.AttachedToVisualTree -= FocusedElement_OnAttachedToVisualTree;
+        }
+
+        if (newValue is { })
+        {
+            newValue.AttachedToVisualTree += FocusedElement_OnAttachedToVisualTree;
+            newValue.Focus();
         }
     }
 
-    private static void NewValueOnAttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
+    private static void FocusedElement_OnAttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
     {
         if (sender is IInputElement inputElement)
         {
             inputElement.Focus();
-            inputElement.AttachedToVisualTree -= NewValueOnAttachedToVisualTree;
         }
     }
 }
