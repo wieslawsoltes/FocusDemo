@@ -9,14 +9,28 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="FocusDemo">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-    
-    <StackPanel Orientation="Vertical" 
-                local:FocusManager.FocusedElement="{Binding ElementName=TxtB}">
+  <Design.DataContext>
+    <vm:MainWindowViewModel />
+  </Design.DataContext>
+
+  <TabControl>
+
+    <TabItem Header="Tab1">
+      <StackPanel Orientation="Vertical" 
+                  local:FocusManager.FocusedElement="{Binding ElementName=TxtB}">
         <TextBox x:Name="TxtA" Text="A" />
         <TextBox x:Name="TxtB" Text="B" />
-    </StackPanel>
+      </StackPanel>
+    </TabItem>
+
+    <TabItem Header="Tab2">
+      <StackPanel Orientation="Vertical" 
+                  local:FocusManager.FocusedElement="{Binding ElementName=TxtC}">
+        <TextBox x:Name="TxtC" Text="C" />
+        <TextBox x:Name="TxtD" Text="D" />
+      </StackPanel>
+    </TabItem>
+
+  </TabControl>
 
 </Window>
